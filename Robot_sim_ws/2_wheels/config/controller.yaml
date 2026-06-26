@@ -1,0 +1,16 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    self_balance_controller:
+      type: forward_command_controller/ForwardCommandController
+    
+self_balance_controller:
+  ros__parameters:
+    use_sim_time: true
+    joints:
+      - right_wheel_joint
+      - left_wheel_joint
+    interface_name: effort
