@@ -121,6 +121,7 @@ class LqrPidController(Node):
         self.target_yaw_rate = 0.0
         self.yaw_integral = 0.0
         self.gui_connected = False
+        self.startup_timer = 0.0
 
         # Các Pub/Sub
         self.command_pub = self.create_publisher(Float64MultiArray, self.get_parameter('command_topic').value, 10)
@@ -250,12 +251,15 @@ class LqrPidController(Node):
         right_torque = u_balance + u_yaw
         left_torque = u_balance - u_yaw
         
+        # Giới hạn lực cứng
         right_torque = np.clip(right_torque, -self.torque_limit, self.torque_limit)
         left_torque = np.clip(left_torque, -self.torque_limit, self.torque_limit)
         
+        # Giới hạn vận tốc động cơ
         right_torque = self.limit_wheel_speed(right_torque, right_vel)
         left_torque = self.limit_wheel_speed(left_torque, left_vel)
-        
+
+        # Trả lại tốc độ phản xạ tức thì cho thuật toán LQR
         max_delta = self.torque_slew_rate_limit * dt
         right_torque = np.clip(right_torque, self.last_right_torque - max_delta, self.last_right_torque + max_delta)
         left_torque = np.clip(left_torque, self.last_left_torque - max_delta, self.last_left_torque + max_delta)

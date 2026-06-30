@@ -70,7 +70,7 @@ class App(tk.Tk):
         # Định nghĩa các thông số
         self.params = [
             {"name": "Vị trí xe (m)", "min": -10.0, "max": 10.0, "default": 0.0, "step": 0.1},
-            {"name": "Vận tốc xe (m/s)", "min": -5.0, "max": 5.0, "default": 0.0, "step": 0.1},
+            {"name": "Vận tốc xe (m/s)", "min": -0.5, "max": 0.5, "default": 0.0, "step": 0.01},
             {"name": "Góc Yaw (rad)", "min": -3.14, "max": 3.14, "default": 0.0, "step": 0.01},
             {"name": "Vận tốc Yaw (rad/s)", "min": -5.0, "max": 5.0, "default": 0.0, "step": 0.1}
         ]

@@ -29,14 +29,14 @@ def generate_launch_description():
             {'torque_limit': 12.0},
             {'wheel_velocity_limit': 7.27},
             {'overspeed_brake_gain': 4.0},
-            {'torque_slew_rate_limit': 30.0},
+            {'torque_slew_rate_limit': 1000.0},
             {'max_tilt_rad': 0.7},
             
             # Ma trận Q, R 
-            {'q_diag': [1.0, 2000.0, 1.0, 100.0]}, 
+            {'q_diag': [190.0, 16130.0, 100.0, 14.0]}, 
             
             # 3. Tăng R để phạt việc dùng lực mạnh, ép hệ thống tính toán ra mô-men xoắn êm hơn
-            {'r_diag': [20.0]},
+            {'r_diag': [10.0]},
             
             # QUAN TRỌNG: Đảo chiều lực (torque_sign) để xe chạy đúng hướng ngã
             {'pitch_sign': 1.0},
@@ -48,5 +48,5 @@ def generate_launch_description():
 
     return LaunchDescription([
         gazebo_effort_launch,
-        TimerAction(period=10.0, actions=[lqr_controller]),
+        TimerAction(period=2.0, actions=[lqr_controller]),
     ])

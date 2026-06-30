@@ -81,7 +81,7 @@ def generate_launch_description():
             '-name', 'omni_base',
             '-x','0.0',
             '-y','0.0',
-            '-z', '0.1',
+            '-z', '0.085',
             '-R', '0.0',
             '-P', '0.0',
             '-Y', '0.0'
@@ -90,7 +90,7 @@ def generate_launch_description():
     )
 
     delayed_spawn = TimerAction(
-        period=5.0,
+        period=2.0,
         actions=[spawn_robot]
     )
 
@@ -107,7 +107,7 @@ def generate_launch_description():
     )
 
     delayed_bridge = TimerAction(
-        period=5.0,
+        period=2.0,
         actions=[bridge]
     )
 
@@ -139,7 +139,7 @@ def generate_launch_description():
 
 
     delayed_controllers = TimerAction(
-        period=8.0,
+        period=2.5,
         actions=[
             joint_state_broadcaster,
             self_balance_controller,
